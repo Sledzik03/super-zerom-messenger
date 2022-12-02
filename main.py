@@ -173,6 +173,7 @@ class Frames(object):
                                 t.config(state=Tk.NORMAL)
                                 t.insert(Tk.END, x)
                                 t.config(state=Tk.DISABLED)
+                                t.yview_moveto(1)
                                 list_lmessages[i] = wiadomosc
                                 break
             root.update()
