@@ -1,11 +1,11 @@
 import socket
-import tkinter as Tk
 from threading import Thread
 from time import sleep
-from tkinter import ttk
-from PIL import ImageTk, Image
 from tkinter import messagebox
-import os
+from tkinter import ttk
+
+from PIL import ImageTk, Image
+
 import utils
 from utils import *
 
@@ -18,7 +18,7 @@ class Frames(object):
     def __init__(self):
         self.d_text = None
         self.msg = ''
-        self.running = True
+        self.running = False
         self.font = 'Arial'
         self.font_logo = 'Comic Sans MS'
 
@@ -37,7 +37,7 @@ class Frames(object):
 
     def exit_button(self, root):
         root.destroy()
-        # self.running = False
+        self.running = False
         client.close()
         exit(0)
 
@@ -100,7 +100,7 @@ class Frames(object):
     def debug_window(self, event):
         droot = Tk.Toplevel(root)
         droot.title = 'Debug'
-        droot.resizable(0, 0)
+        droot.resizable(False, False)
 
         self.debug = 1
 
@@ -115,6 +115,7 @@ class Frames(object):
         b_exit.grid(column=1, row=0, padx=5, pady=5, sticky='e')
 
         self.d_text = Tk.Text(dframe, bg=self.d_background_color_light, fg=self.d_font_color)
+        self.d_text.config(state=Tk.DISABLED)
         self.d_text.grid(column=0, row=1, columnspan=2, sticky='nsew', padx=5, pady=5)
 
         self.m_frame.columnconfigure(1, weight=1)
@@ -139,7 +140,8 @@ class Frames(object):
                 break
             client.send("ping".encode(FORMAT))
             data_odb = client.recv(4096).decode()
-            data = decrypt(data_odb)
+            # data = utils.decrypt(data_odb)
+            data = data_odb
             if data:
                 m = data.split(',')
                 if self.debug:
@@ -237,7 +239,8 @@ class Frames(object):
                        fg=self.font_color, justify=Tk.CENTER)
         ent.grid(column=1, row=5, sticky='we', pady=5, padx=5)
 
-        button = Tk.Button(self.frame, text='Połącz', font=(self.font, 12), command=lambda: self.login_compl(root, ent_ip, ent),
+        button = Tk.Button(self.frame, text='Połącz', font=(self.font, 12),
+                           command=lambda: self.login_compl(root, ent_ip, ent),
                            bg=self.background_color_light, fg=self.font_color)
         button.grid(column=1, row=6, pady=10, padx=5)
 
@@ -249,6 +252,9 @@ class Frames(object):
         root.title('SuperŻerom')
         root.geometry("800x600")
         root.resizable(0, 0)
+
+        self.running = True
+        client.send("ping".encode(FORMAT))
 
         # STYLES
         style = ttk.Style()
@@ -277,6 +283,8 @@ class Frames(object):
                                   bg=self.background_color_light,
                                   fg=self.font_color)
         self.m_b_exit.grid(column=2, row=0, sticky='ew', padx=5)
+
+
 
         # threeview
 
