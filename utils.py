@@ -15,6 +15,7 @@ def send_message(t, ent, client, FORMAT, name, przekl):
     if legit:
         msgclient = "message " + msg.replace(" ", "§") + "," + name
         if msg:
+            # client.send(encrypt(msgclient).encode())
             client.send(msgclient.encode())
             x = name + ' -> ' + msg + '\n'
             t.config(state=Tk.NORMAL)
@@ -38,6 +39,7 @@ def send_message_enter(event, t, ent, client, FORMAT, name, przekl):
     if legit:
         msgclient = "message " + msg.replace(" ", "§") + "," + name
         if msg:
+            # client.send(encrypt(msgclient).encode())
             client.send(msgclient.encode())
             x = name + ' -> ' + msg + '\n'
             t.config(state=Tk.NORMAL)
@@ -71,4 +73,3 @@ def decrypt(plaintext):
         elif 97 <= ord(char) <= 122:
             cipher_text += chr((ord(char) - przes - 97) % 26 + 97)
     return cipher_text
-
