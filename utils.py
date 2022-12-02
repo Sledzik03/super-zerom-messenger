@@ -15,7 +15,7 @@ def send_message(t, ent, client, FORMAT, name, przekl):
     if legit:
         msgclient = "message " + msg.replace(" ", "§") + "," + name
         if msg:
-            client.send(encrypt(msgclient).encode())
+            client.send(msgclient.encode())
             x = name + ' -> ' + msg + '\n'
             t.config(state=Tk.NORMAL)
             t.insert(Tk.END, x)
@@ -38,7 +38,7 @@ def send_message_enter(event, t, ent, client, FORMAT, name, przekl):
     if legit:
         msgclient = "message " + msg.replace(" ", "§") + "," + name
         if msg:
-            client.send(encrypt(msgclient).encode())
+            client.send(msgclient.encode())
             x = name + ' -> ' + msg + '\n'
             t.config(state=Tk.NORMAL)
             t.insert(Tk.END, x)
