@@ -70,7 +70,6 @@ class Frames(object):
             root.update()
 
     def login_compl(self, root, entry_ip, entry):
-        # 192.168.1.101
         if entry_ip.get() != "" and entry.get() != "":
             try:
                 client.connect((entry_ip.get(), 5555))
@@ -231,7 +230,7 @@ class Frames(object):
         ent_ip = Tk.Entry(self.frame, font=(self.font, 10), bg=self.background_color_light,
                           fg=self.font_color, justify=Tk.CENTER)
         # TODO wykasuj to
-        ent_ip.insert(0, '192.168.1.101')
+        ent_ip.insert(0, '')
         ent_ip.grid(column=1, row=3, sticky='we', pady=5, padx=5)
 
         l_name = Tk.Label(self.frame, text='Nazwa:', bg=self.background_color)
